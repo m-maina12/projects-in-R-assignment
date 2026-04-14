@@ -1,10 +1,26 @@
 ---
-title: "Untitled"
+title: "Analysis of COVID data"
 author: "Marta Mainetti"
-format: html
+format: 
+  html:
+    toc: true
+    code-fold: show
+    code-tools: true
+    df-print: paged
 ---
 
-# Import data
+
+# Import libraries and prepare setting
+
+```{r, warning = FALSE}
+library(dplyr)
+library(medicaldata)
+```
+
+
+# Load data
+
+
 
 # Preliminary analysis
 
