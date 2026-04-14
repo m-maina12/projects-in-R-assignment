@@ -3,3 +3,11 @@ title: "Untitled"
 author: "Marta Mainetti"
 format: html
 ---
+
+# Import data
+
+# Preliminary analysis
+
+# Data visualization
+
+# Conclusion
