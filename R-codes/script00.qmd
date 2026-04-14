@@ -12,18 +12,51 @@ format:
 
 # Import libraries and prepare setting
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, message = FALSE}
 library(dplyr)
+library(ggplot2)
 library(medicaldata)
+library(skimr)
+library(unibeCols)
 ```
-
 
 # Load data
 
+```{r}
+covid_testing_raw <- medicaldata::covid_testing
+```
+
+```{r}
+covid_testing <- covid_testing_raw %>% 
+  mutate(subject_id = as.character(subject_id)) %>% 
+  filter(result != "invalid" & age < 25)
+
+head(covid_testing)
+```
 
 
 # Preliminary analysis
 
+```{r}
+skim_without_charts(covid_testing)
+table(covid_testing$result)
+```
+
+
 # Data visualization
+
+```{r}
+ggplot(data = covid_testing, aes(x = age, y = result)) +
+  geom_boxplot()
+```
+
+
+```{r}
+ggplot(data = covid_testing, aes(x = pan_day, y = age, col = result)) +
+  geom_point() +
+  labs(x = "Days after start of pandemic", y = "Age", 
+       col = "Test result")
+```
+
 
 # Conclusion
