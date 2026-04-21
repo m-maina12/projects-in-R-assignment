@@ -1,6 +1,7 @@
 ---
-title: "Analysis of COVID data"
+title: "Analysis of SARS-CoV2 cases in a pediatric hospital"
 author: "Marta Mainetti"
+date: "`r date()`"
 format: 
   html:
     toc: true
@@ -13,8 +14,10 @@ format:
 # Import libraries and prepare setting
 
 ```{r, warning = FALSE, message = FALSE}
+library(cowplot)
 library(dplyr)
 library(ggplot2)
+library(ggpointdensity)
 library(medicaldata)
 library(skimr)
 library(unibeCols)
@@ -29,7 +32,7 @@ covid_testing_raw <- medicaldata::covid_testing
 ```{r}
 covid_testing <- covid_testing_raw %>% 
   mutate(subject_id = as.character(subject_id)) %>% 
-  filter(result != "invalid" & age < 25)
+  filter(result != "invalid")
 
 head(covid_testing)
 ```
@@ -46,16 +49,43 @@ table(covid_testing$result)
 # Data visualization
 
 ```{r}
-ggplot(data = covid_testing, aes(x = age, y = result)) +
-  geom_boxplot()
+ggplot(data = covid_testing, aes(x = age, y = result, fill = result)) +
+  geom_boxplot() +
+  scale_fill_manual(breaks = c("positive", "negative"),
+                    values = c(unibeRedS()[2], unibeMustardS()[2])) +
+  theme(legend.position = "none")
 ```
 
 
 ```{r}
-ggplot(data = covid_testing, aes(x = pan_day, y = age, col = result)) +
-  geom_point() +
+p1 <- ggplot(data = covid_testing, aes(x = pan_day, y = age, col = result)) +
+  geom_point(size = 1) +
+  scale_color_manual(breaks = c("positive", "negative"),
+                    values = c(unibeRedS()[2], unibeMustardS()[2])) +
   labs(x = "Days after start of pandemic", y = "Age", 
-       col = "Test result")
+       col = "Test result") +
+  theme(legend.position = "bottom")
+
+p2 <- ggplot(data = covid_testing, aes(x = pan_day, y = age)) +
+  geom_pointdensity(size = 1) +
+  labs(x = "Days after start of pandemic", y = "Age") +
+  theme(legend.position = "bottom")
+
+cowplot::plot_grid(plotlist = list(p1, p2), align = "h", labels = c("A", "B"))
+```
+
+# Aggregated data
+
+```{r}
+g <- covid_testing %>% group_by(pan_day) %>% 
+  summarize(cases_per_day = sum(result == "positive"))
+
+ggplot(data = g, aes(x = pan_day, y = cases_per_day)) +
+  geom_line() +
+  geom_smooth(method = "lm", se = FALSE, color = "dodgerblue",
+              linetype = 2) +
+  labs(x = "Days from start of the pandemic",
+       y = "Daily incidence")
 ```
 
 
