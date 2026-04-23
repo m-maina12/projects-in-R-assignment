@@ -23,18 +23,53 @@ library(skimr)
 library(unibeCols)
 ```
 
+The aim of this work is to... For this purpose, I will work on the data
+`covid_testing` from the library `medicaldata`, that is a dataset containing
+details of SARS-CoV-2 testing in 2020 at the Children's Hospital of Philadelphia,
+Pennsylvania (CHOP).
+     
+
 # Load data
 
 ```{r}
 covid_testing_raw <- medicaldata::covid_testing
 ```
 
+We proceed with an initial data manipulation. We exclude the subects with an invalid
+result in the test
+
 ```{r}
 covid_testing <- covid_testing_raw %>% 
-  mutate(subject_id = as.character(subject_id)) %>% 
-  filter(result != "invalid")
+  filter(result != "invalid") %>% 
+  mutate(outcome = as.numeric(result == "positive")) %>% 
+  distinct()
 
 head(covid_testing)
+```
+
+```{r}
+length(unique(covid_testing$subject_id)) ; nrow(covid_testing)
+```
+
+This means that some subjects have more than one measurements. How should we
+deal with that? 
+We have some options:
+
+- We ignore it. It is not relevant to the analysis whether we have two different
+testings
+
+- We keep either the first or the last, considering that there might be correlations
+between the events (e.g. subjects that have already been positive have higher
+probability of compared to children that have never been tested positive)
+
+I decided to go with the second option and keep only the results of the first covid test performed on each child:
+
+```{r}
+covid_testing <- covid_testing %>% 
+  arrange(subject_id, pan_day) %>% 
+  group_by(subject_id) %>% 
+  slice(1) %>% 
+  ungroup()
 ```
 
 
@@ -44,6 +79,9 @@ head(covid_testing)
 skim_without_charts(covid_testing)
 table(covid_testing$result)
 ```
+
+
+
 
 
 # Data visualization
@@ -61,7 +99,7 @@ ggplot(data = covid_testing, aes(x = age, y = result, fill = result)) +
 p1 <- ggplot(data = covid_testing, aes(x = pan_day, y = age, col = result)) +
   geom_point(size = 1) +
   scale_color_manual(breaks = c("positive", "negative"),
-                    values = c(unibeRedS()[2], unibeMustardS()[2])) +
+                    values = c(unibeRedS()[1], unibeMustardS()[2])) +
   labs(x = "Days after start of pandemic", y = "Age", 
        col = "Test result") +
   theme(legend.position = "bottom")
@@ -82,10 +120,17 @@ g <- covid_testing %>% group_by(pan_day) %>%
 
 ggplot(data = g, aes(x = pan_day, y = cases_per_day)) +
   geom_line() +
-  geom_smooth(method = "lm", se = FALSE, color = "dodgerblue",
-              linetype = 2) +
   labs(x = "Days from start of the pandemic",
        y = "Daily incidence")
+```
+
+# Logistic model
+
+```{r}
+mod.logistic <- glm(outcome ~ gender + age + drive_thru_ind, 
+                    data = covid_testing, family = "binomial")
+
+summary(mod.logistic)
 ```
 
 
