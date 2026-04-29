@@ -14,17 +14,19 @@ format:
 # Import libraries and prepare setting
 
 ```{r, warning = FALSE, message = FALSE}
+library(broom)
 library(cowplot)
 library(dplyr)
 library(ggplot2)
 library(ggpointdensity)
+library(gtsummary)
 library(medicaldata)
 library(skimr)
 library(unibeCols)
 ```
 
-The aim of this work is to... For this purpose, I will work on the data
-`covid_testing` from the library `medicaldata`, that is a dataset containing
+The aim of this work is to evaluate the association between the incidence of
+covid 19 and some demographic characteristics. For this purpose, I will work on the data `covid_testing` from the library `medicaldata`, that is a dataset containing
 details of SARS-CoV-2 testing in 2020 at the Children's Hospital of Philadelphia,
 Pennsylvania (CHOP).
      
@@ -51,16 +53,11 @@ head(covid_testing)
 length(unique(covid_testing$subject_id)) ; nrow(covid_testing)
 ```
 
-This means that some subjects have more than one measurements. How should we
-deal with that? 
-We have some options:
+This means that some subjects have more than one measurements. How should we deal with that? We have some options:
 
-- We ignore it. It is not relevant to the analysis whether we have two different
-testings
+- We ignore it. It is not relevant to the analysis whether we have two different testings
 
-- We keep either the first or the last, considering that there might be correlations
-between the events (e.g. subjects that have already been positive have higher
-probability of compared to children that have never been tested positive)
+- We keep either the first or the last, considering that there might be correlations between the events (e.g. subjects that have already been positive have higher probability of compared to children that have never been tested positive)
 
 I decided to go with the second option and keep only the results of the first covid test performed on each child:
 
@@ -77,14 +74,24 @@ covid_testing <- covid_testing %>%
 
 ```{r}
 skim_without_charts(covid_testing)
-table(covid_testing$result)
 ```
 
 
 
-
-
 # Data visualization
+
+```{r}
+g <- covid_testing %>% group_by(pan_day) %>% 
+  summarize(cases_per_day = sum(result == "positive"))
+
+cor.time.cases <- round(cor(g$pan_day, g$cases_per_day, method = "spearman"), 3)
+
+ggplot(data = g, aes(x = pan_day, y = cases_per_day)) +
+  geom_line() +
+  annotate("text", x = 7, y = 15, label = paste("r =", cor.time.cases)) +
+  labs(x = "Days from start of the pandemic",
+       y = "Daily incidence")
+```
 
 ```{r}
 ggplot(data = covid_testing, aes(x = age, y = result, fill = result)) +
@@ -112,25 +119,14 @@ p2 <- ggplot(data = covid_testing, aes(x = pan_day, y = age)) +
 cowplot::plot_grid(plotlist = list(p1, p2), align = "h", labels = c("A", "B"))
 ```
 
-# Aggregated data
-
-```{r}
-g <- covid_testing %>% group_by(pan_day) %>% 
-  summarize(cases_per_day = sum(result == "positive"))
-
-ggplot(data = g, aes(x = pan_day, y = cases_per_day)) +
-  geom_line() +
-  labs(x = "Days from start of the pandemic",
-       y = "Daily incidence")
-```
 
 # Logistic model
 
 ```{r}
-mod.logistic <- glm(outcome ~ gender + age + drive_thru_ind, 
-                    data = covid_testing, family = "binomial")
+mod <- glm(outcome ~ gender + pan_day + age + drive_thru_ind,
+           data = covid_testing, family = "binomial")
 
-summary(mod.logistic)
+tbl_regression(mod, exponentiate = TRUE)
 ```
 
 
