@@ -25,11 +25,10 @@ library(skimr)
 library(unibeCols)
 ```
 
-The aim of this work is to evaluate the association between the incidence of
-covid 19 and some demographic characteristics. For this purpose, I will work on the data `covid_testing` from the library `medicaldata`, that is a dataset containing
-details of SARS-CoV-2 testing in 2020 at the Children's Hospital of Philadelphia,
-Pennsylvania (CHOP).
-     
+The aim of this work is to evaluate the relationship between the incidence of 
+cases of covid 19 (measured with the positivity of the covid test) and the time since the start of the pandemic. 
+For this purpose, I will use the data `covid_testing` from the library
+`medicaldata`, that is a dataset containing details of SARS-CoV-2 testing in 2020 at the Children's Hospital of Philadelphia, Pennsylvania (CHOP).
 
 # Load data
 
@@ -37,8 +36,8 @@ Pennsylvania (CHOP).
 covid_testing_raw <- medicaldata::covid_testing
 ```
 
-We proceed with an initial data manipulation. We exclude the subects with an invalid
-result in the test
+We proceed with an initial data manipulation. We exclude the subjects with an invalid
+result in the test, and create a binary outcome: 
 
 ```{r}
 covid_testing <- covid_testing_raw %>% 
@@ -49,11 +48,14 @@ covid_testing <- covid_testing_raw %>%
 head(covid_testing)
 ```
 
+As we can see, we have the column `subject_id` that identifies patients in the
+dataset. Let's check if we have multiple measurements per subject:
+
 ```{r}
 length(unique(covid_testing$subject_id)) ; nrow(covid_testing)
 ```
 
-This means that some subjects have more than one measurements. How should we deal with that? We have some options:
+Since the number of records is larger than the unique values of `subject_id`, this means that some subjects have more than one measurement. How should we deal with that? We have some options:
 
 - We ignore it. It is not relevant to the analysis whether we have two different testings
 
@@ -72,13 +74,29 @@ covid_testing <- covid_testing %>%
 
 # Preliminary analysis
 
+## Descriptive statistics
+
+In this section I will perform some descriptive analysis of the dataset. 
+
 ```{r}
-skim_without_charts(covid_testing)
+skim_without_charts(covid_testing[, sapply(covid_testing, is.numeric)])
+```
+
+And we should also see how many positive cases we have out of the total:
+
+```{r}
+t <- table(covid_testing$outcome); t
+round(t/ nrow(covid_testing), 3)
 ```
 
 
+There is a huge imbalance between the two groups, and this should be considered
+when implementing the analysis. 
 
-# Data visualization
+
+## Data visualization
+
+It is useful to visualize the number of cases overtime, together with the correlation
 
 ```{r}
 g <- covid_testing %>% group_by(pan_day) %>% 
@@ -93,6 +111,9 @@ ggplot(data = g, aes(x = pan_day, y = cases_per_day)) +
        y = "Daily incidence")
 ```
 
+Now, let's check the differences in the two groups, i.e. distinguishing the subjects who were
+tested positive and negative:
+
 ```{r}
 ggplot(data = covid_testing, aes(x = age, y = result, fill = result)) +
   geom_boxplot() +
@@ -101,6 +122,11 @@ ggplot(data = covid_testing, aes(x = age, y = result, fill = result)) +
   theme(legend.position = "none")
 ```
 
+We can see that age seems larger in positive subjects, compared to negative, and
+that we do not have data only related to children but also to adults (even if they
+are outliers).
+
+Now, let' see how days since pandemic are related to age: 
 
 ```{r}
 p1 <- ggplot(data = covid_testing, aes(x = pan_day, y = age, col = result)) +
@@ -119,8 +145,22 @@ p2 <- ggplot(data = covid_testing, aes(x = pan_day, y = age)) +
 cowplot::plot_grid(plotlist = list(p1, p2), align = "h", labels = c("A", "B"))
 ```
 
+As we can see, plot A displays different colours for positive and negative,
+while plot B shows the density of points. We can say that most subjects are in
+the age range (0, 25)
 
 # Logistic model
+
+Let's fit now a logistic regression where we model the outcome, i.e. the positivity
+of the covid test, with the following covariates:
+
+- gender
+
+- days since pandemic (our main interest)
+
+- age
+
+- specimen collection via drive-thru site or not 
 
 ```{r}
 mod <- glm(outcome ~ gender + pan_day + age + drive_thru_ind,
@@ -129,5 +169,28 @@ mod <- glm(outcome ~ gender + pan_day + age + drive_thru_ind,
 tbl_regression(mod, exponentiate = TRUE)
 ```
 
+We can observed that there's a slight increase in the event odds for age, but
+the coefficients of days was not significant. The p-value is slightly larger than the 
+usual 0.05, so we cannot completely exclude the existence of a relationship 
+between the two variables.
+
+Let's change the time scale: instead of day, we can evaluate weekly associations.
+
+```{r}
+covid_testing$pan_week <- floor(covid_testing$pan_day / 7)
+
+mod.week <- glm(outcome ~ gender + pan_week + age + drive_thru_ind,
+           data = covid_testing, family = "binomial")
+
+tbl_regression(mod.week, exponentiate = TRUE)
+```
+
+Results here do not differ from the previous case. 
 
 # Conclusion
+
+The analyses here do not show a strong relationship between time and covid cases. 
+However, these results are not reliable, nor robust, considering that
+only 6% of the total sample was tested positive. In this sense, we might not have
+enough data to uncover the association between time and covid cases. 
+
