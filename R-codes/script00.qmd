@@ -25,7 +25,7 @@ library(skimr)
 library(unibeCols)
 ```
 
-The aim of this work is to evaluate the relationship between the incidence of 
+The aim of this work is to evaluate the relationship between the number of 
 cases of covid 19 (measured with the positivity of the covid test) and the time since the start of the pandemic. 
 For this purpose, I will use the data `covid_testing` from the library
 `medicaldata`, that is a dataset containing details of SARS-CoV-2 testing in 2020 at the Children's Hospital of Philadelphia, Pennsylvania (CHOP).
@@ -108,7 +108,7 @@ ggplot(data = g, aes(x = pan_day, y = cases_per_day)) +
   geom_line() +
   annotate("text", x = 7, y = 15, label = paste("r =", cor.time.cases)) +
   labs(x = "Days from start of the pandemic",
-       y = "Daily incidence")
+       y = "Daily cases")
 ```
 
 Now, let's check the differences in the two groups, i.e. distinguishing the subjects who were

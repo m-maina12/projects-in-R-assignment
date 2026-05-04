@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Marta Mainetti">
-<meta name="dcterms.date" content="2026-05-03">
+<meta name="dcterms.date" content="2026-05-04">
 
 <title>Analysis of SARS-CoV2 cases in a pediatric hospital</title>
 <style>
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 3, 2026</p>
+      <p class="date">May 4, 2026</p>
     </div>
   </div>
   
@@ -144,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(unibeCols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The aim of this work is to evaluate the relationship between the incidence of cases of covid 19 (measured with the positivity of the covid test) and the time since the start of the pandemic. For this purpose, I will use the data <code>covid_testing</code> from the library <code>medicaldata</code>, that is a dataset containing details of SARS-CoV-2 testing in 2020 at the Children’s Hospital of Philadelphia, Pennsylvania (CHOP).</p>
+<p>The aim of this work is to evaluate the relationship between the number of cases of covid 19 (measured with the positivity of the covid test) and the time since the start of the pandemic. For this purpose, I will use the data <code>covid_testing</code> from the library <code>medicaldata</code>, that is a dataset containing details of SARS-CoV-2 testing in 2020 at the Children’s Hospital of Philadelphia, Pennsylvania (CHOP).</p>
 </section>
 <section id="load-data" class="level1">
 <h1>Load data</h1>
@@ -430,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">7</span>, <span class="at">y =</span> <span class="dv">15</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"r ="</span>, cor.time.cases)) <span class="sc">+</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Days from start of the pandemic"</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Daily incidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Daily cases"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -507,23 +507,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="lxjxibytgk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lxjxibytgk table {
+<div id="xgjevdrbbo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xgjevdrbbo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lxjxibytgk thead, #lxjxibytgk tbody, #lxjxibytgk tfoot, #lxjxibytgk tr, #lxjxibytgk td, #lxjxibytgk th {
+#xgjevdrbbo thead, #xgjevdrbbo tbody, #xgjevdrbbo tfoot, #xgjevdrbbo tr, #xgjevdrbbo td, #xgjevdrbbo th {
   border-style: none;
 }
 
-#lxjxibytgk p {
+#xgjevdrbbo p {
   margin: 0;
   padding: 0;
 }
 
-#lxjxibytgk .gt_table {
+#xgjevdrbbo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -549,12 +549,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_caption {
+#xgjevdrbbo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lxjxibytgk .gt_title {
+#xgjevdrbbo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -566,7 +566,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#lxjxibytgk .gt_subtitle {
+#xgjevdrbbo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -578,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#lxjxibytgk .gt_heading {
+#xgjevdrbbo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -590,13 +590,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_bottom_border {
+#xgjevdrbbo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_col_headings {
+#xgjevdrbbo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -611,7 +611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_col_heading {
+#xgjevdrbbo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -631,7 +631,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lxjxibytgk .gt_column_spanner_outer {
+#xgjevdrbbo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -643,15 +643,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#lxjxibytgk .gt_column_spanner_outer:first-child {
+#xgjevdrbbo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lxjxibytgk .gt_column_spanner_outer:last-child {
+#xgjevdrbbo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lxjxibytgk .gt_column_spanner {
+#xgjevdrbbo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -663,11 +663,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#lxjxibytgk .gt_spanner_row {
+#xgjevdrbbo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lxjxibytgk .gt_group_heading {
+#xgjevdrbbo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -693,7 +693,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#lxjxibytgk .gt_empty_group_heading {
+#xgjevdrbbo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -708,15 +708,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#lxjxibytgk .gt_from_md > :first-child {
+#xgjevdrbbo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lxjxibytgk .gt_from_md > :last-child {
+#xgjevdrbbo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lxjxibytgk .gt_row {
+#xgjevdrbbo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -735,7 +735,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lxjxibytgk .gt_stub {
+#xgjevdrbbo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -748,7 +748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lxjxibytgk .gt_stub_row_group {
+#xgjevdrbbo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -762,15 +762,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#lxjxibytgk .gt_row_group_first td {
+#xgjevdrbbo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lxjxibytgk .gt_row_group_first th {
+#xgjevdrbbo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lxjxibytgk .gt_summary_row {
+#xgjevdrbbo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -780,16 +780,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lxjxibytgk .gt_first_summary_row {
+#xgjevdrbbo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_first_summary_row.thick {
+#xgjevdrbbo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lxjxibytgk .gt_last_summary_row {
+#xgjevdrbbo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -799,7 +799,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_grand_summary_row {
+#xgjevdrbbo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -809,7 +809,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lxjxibytgk .gt_first_grand_summary_row {
+#xgjevdrbbo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -819,7 +819,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_last_grand_summary_row_top {
+#xgjevdrbbo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -829,11 +829,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_striped {
+#xgjevdrbbo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lxjxibytgk .gt_table_body {
+#xgjevdrbbo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -842,7 +842,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_footnotes {
+#xgjevdrbbo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -856,7 +856,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_footnote {
+#xgjevdrbbo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -865,7 +865,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lxjxibytgk .gt_sourcenotes {
+#xgjevdrbbo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -879,7 +879,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lxjxibytgk .gt_sourcenote {
+#xgjevdrbbo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -887,72 +887,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lxjxibytgk .gt_left {
+#xgjevdrbbo .gt_left {
   text-align: left;
 }
 
-#lxjxibytgk .gt_center {
+#xgjevdrbbo .gt_center {
   text-align: center;
 }
 
-#lxjxibytgk .gt_right {
+#xgjevdrbbo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lxjxibytgk .gt_font_normal {
+#xgjevdrbbo .gt_font_normal {
   font-weight: normal;
 }
 
-#lxjxibytgk .gt_font_bold {
+#xgjevdrbbo .gt_font_bold {
   font-weight: bold;
 }
 
-#lxjxibytgk .gt_font_italic {
+#xgjevdrbbo .gt_font_italic {
   font-style: italic;
 }
 
-#lxjxibytgk .gt_super {
+#xgjevdrbbo .gt_super {
   font-size: 65%;
 }
 
-#lxjxibytgk .gt_footnote_marks {
+#xgjevdrbbo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lxjxibytgk .gt_asterisk {
+#xgjevdrbbo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lxjxibytgk .gt_indent_1 {
+#xgjevdrbbo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lxjxibytgk .gt_indent_2 {
+#xgjevdrbbo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lxjxibytgk .gt_indent_3 {
+#xgjevdrbbo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lxjxibytgk .gt_indent_4 {
+#xgjevdrbbo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lxjxibytgk .gt_indent_5 {
+#xgjevdrbbo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lxjxibytgk .katex-display {
+#xgjevdrbbo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lxjxibytgk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xgjevdrbbo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1037,23 +1037,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod.week, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="ryyeerztym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ryyeerztym table {
+<div id="iuexglbfol" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iuexglbfol table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ryyeerztym thead, #ryyeerztym tbody, #ryyeerztym tfoot, #ryyeerztym tr, #ryyeerztym td, #ryyeerztym th {
+#iuexglbfol thead, #iuexglbfol tbody, #iuexglbfol tfoot, #iuexglbfol tr, #iuexglbfol td, #iuexglbfol th {
   border-style: none;
 }
 
-#ryyeerztym p {
+#iuexglbfol p {
   margin: 0;
   padding: 0;
 }
 
-#ryyeerztym .gt_table {
+#iuexglbfol .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1079,12 +1079,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_caption {
+#iuexglbfol .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ryyeerztym .gt_title {
+#iuexglbfol .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1096,7 +1096,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ryyeerztym .gt_subtitle {
+#iuexglbfol .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1108,7 +1108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ryyeerztym .gt_heading {
+#iuexglbfol .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1120,13 +1120,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_bottom_border {
+#iuexglbfol .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_col_headings {
+#iuexglbfol .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1141,7 +1141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_col_heading {
+#iuexglbfol .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1161,7 +1161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ryyeerztym .gt_column_spanner_outer {
+#iuexglbfol .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1173,15 +1173,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ryyeerztym .gt_column_spanner_outer:first-child {
+#iuexglbfol .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ryyeerztym .gt_column_spanner_outer:last-child {
+#iuexglbfol .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ryyeerztym .gt_column_spanner {
+#iuexglbfol .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1193,11 +1193,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ryyeerztym .gt_spanner_row {
+#iuexglbfol .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ryyeerztym .gt_group_heading {
+#iuexglbfol .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1223,7 +1223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ryyeerztym .gt_empty_group_heading {
+#iuexglbfol .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1238,15 +1238,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ryyeerztym .gt_from_md > :first-child {
+#iuexglbfol .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ryyeerztym .gt_from_md > :last-child {
+#iuexglbfol .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ryyeerztym .gt_row {
+#iuexglbfol .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1265,7 +1265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ryyeerztym .gt_stub {
+#iuexglbfol .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1278,7 +1278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ryyeerztym .gt_stub_row_group {
+#iuexglbfol .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1292,15 +1292,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ryyeerztym .gt_row_group_first td {
+#iuexglbfol .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ryyeerztym .gt_row_group_first th {
+#iuexglbfol .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ryyeerztym .gt_summary_row {
+#iuexglbfol .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1310,16 +1310,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ryyeerztym .gt_first_summary_row {
+#iuexglbfol .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_first_summary_row.thick {
+#iuexglbfol .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ryyeerztym .gt_last_summary_row {
+#iuexglbfol .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1329,7 +1329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_grand_summary_row {
+#iuexglbfol .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1339,7 +1339,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ryyeerztym .gt_first_grand_summary_row {
+#iuexglbfol .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1349,7 +1349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_last_grand_summary_row_top {
+#iuexglbfol .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1359,11 +1359,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_striped {
+#iuexglbfol .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ryyeerztym .gt_table_body {
+#iuexglbfol .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1372,7 +1372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_footnotes {
+#iuexglbfol .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1386,7 +1386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_footnote {
+#iuexglbfol .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1395,7 +1395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ryyeerztym .gt_sourcenotes {
+#iuexglbfol .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1409,7 +1409,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ryyeerztym .gt_sourcenote {
+#iuexglbfol .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1417,72 +1417,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ryyeerztym .gt_left {
+#iuexglbfol .gt_left {
   text-align: left;
 }
 
-#ryyeerztym .gt_center {
+#iuexglbfol .gt_center {
   text-align: center;
 }
 
-#ryyeerztym .gt_right {
+#iuexglbfol .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ryyeerztym .gt_font_normal {
+#iuexglbfol .gt_font_normal {
   font-weight: normal;
 }
 
-#ryyeerztym .gt_font_bold {
+#iuexglbfol .gt_font_bold {
   font-weight: bold;
 }
 
-#ryyeerztym .gt_font_italic {
+#iuexglbfol .gt_font_italic {
   font-style: italic;
 }
 
-#ryyeerztym .gt_super {
+#iuexglbfol .gt_super {
   font-size: 65%;
 }
 
-#ryyeerztym .gt_footnote_marks {
+#iuexglbfol .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ryyeerztym .gt_asterisk {
+#iuexglbfol .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ryyeerztym .gt_indent_1 {
+#iuexglbfol .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ryyeerztym .gt_indent_2 {
+#iuexglbfol .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ryyeerztym .gt_indent_3 {
+#iuexglbfol .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ryyeerztym .gt_indent_4 {
+#iuexglbfol .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ryyeerztym .gt_indent_5 {
+#iuexglbfol .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ryyeerztym .katex-display {
+#iuexglbfol .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ryyeerztym div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iuexglbfol div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2060,7 +2060,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="in">library(unibeCols)</span></span>
 <span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>The aim of this work is to evaluate the relationship between the incidence of </span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>The aim of this work is to evaluate the relationship between the number of </span>
 <span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>cases of covid 19 (measured with the positivity of the covid test) and the time since the start of the pandemic. </span>
 <span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>For this purpose, I will use the data <span class="in">`covid_testing`</span> from the library</span>
 <span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="in">`medicaldata`</span>, that is a dataset containing details of SARS-CoV-2 testing in 2020 at the Children's Hospital of Philadelphia, Pennsylvania (CHOP).</span>
@@ -2143,7 +2143,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">7</span>, <span class="at">y =</span> <span class="dv">15</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"r ="</span>, cor.time.cases)) <span class="sc">+</span></span>
 <span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Days from start of the pandemic"</span>,</span>
-<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Daily incidence"</span>)</span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Daily cases"</span>)</span>
 <span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>Now, let's check the differences in the two groups, i.e. distinguishing the subjects who were</span>
